@@ -24,12 +24,7 @@ class LandingPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   devtools.log('For Parents');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MChatInstructionsPage(),
-                    ),
-                  );
+                  Navigator.pushNamed(context, '/parents');
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -49,6 +44,7 @@ class LandingPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   devtools.log('For Children');
+                  Navigator.pushNamed(context, '/children');
                 },
                 child: Container(
                   decoration: BoxDecoration(

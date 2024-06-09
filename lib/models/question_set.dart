@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mimosa/app_ui.dart';
 
-import 'question.dart';
+import 'questions/question.dart';
 
-class QuestionSet {
+class QuestionSet extends ChangeNotifier {
   List<Question> questions = <Question>[];
 
   QuestionSet() {
@@ -102,5 +102,239 @@ class QuestionSet {
         ),
       ),
     );
+
+    questions.add(
+      Question(
+        question:
+            'Does your child point with one finger to ask for something or to get help?',
+        explanationTextSpan: TextSpan(
+          text: '\n(FOR EXAMPLE ',
+          style: const TextStyle(
+              fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+          children: <TextSpan>[
+            TextSpan(
+              text: 'pointing to a snack or toy that is out of reach)',
+              style: MimosaTextStyle.bodyText1,
+            ),
+          ],
+        ),
+      ),
+    );
+    questions.add(
+      Question(
+        question:
+            'Does your child point with one finger to show you something interesting?',
+        explanationTextSpan: TextSpan(
+          text: '\n(FOR EXAMPLE ',
+          style: const TextStyle(
+              fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+          children: <TextSpan>[
+            TextSpan(
+              text:
+                  'pointing to an airplane in the sky or a big truck in the road)',
+              style: MimosaTextStyle.bodyText1,
+            ),
+          ],
+        ),
+      ),
+    );
+    questions.add(
+      Question(
+        question: 'Is your child interested in other children?',
+        explanationTextSpan: TextSpan(
+          text: '\n(FOR EXAMPLE ',
+          style: const TextStyle(
+              fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+          children: <TextSpan>[
+            TextSpan(
+              text:
+                  'does your child watch other children, smile at them, or go to them?)',
+              style: MimosaTextStyle.bodyText1,
+            ),
+          ],
+        ),
+      ),
+    );
+    questions.add(
+      Question(
+        question:
+            'Does your child show you things by bringing them to you or holding them up for you to see – not to get help, but just to share?',
+        explanationTextSpan: TextSpan(
+          text: '\n(FOR EXAMPLE ',
+          style: const TextStyle(
+              fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+          children: <TextSpan>[
+            TextSpan(
+              text: 'showing you a flower, a stuffed animal, or a toy truck)',
+              style: MimosaTextStyle.bodyText1,
+            ),
+          ],
+        ),
+      ),
+    );
+    questions.add(
+      Question(
+        question: 'Does your child respond when you call his or her name?',
+        explanationTextSpan: TextSpan(
+          text: '\n(FOR EXAMPLE ',
+          style: const TextStyle(
+              fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+          children: <TextSpan>[
+            TextSpan(
+              text:
+                  'does he or she look up, talk or babble, or stop what he or she is doing when you call his or her name?)',
+              style: MimosaTextStyle.bodyText1,
+            ),
+          ],
+        ),
+      ),
+    );
+    questions.add(
+      Question(
+          question:
+              'When you smile at your child, does he or she smile back at you?'),
+    );
+
+    questions.add(Question(
+      question: 'Does your child get upset by everyday noises?',
+      explanationTextSpan: TextSpan(
+        text: '\n(FOR EXAMPLE ',
+        style: const TextStyle(
+            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+        children: <TextSpan>[
+          TextSpan(
+            text: 'a vacuum cleaner or loud music)',
+            style: MimosaTextStyle.bodyText1,
+          ),
+        ],
+      ),
+    ));
+
+    questions.add(Question(
+      question: 'Does your child walk?',
+    ));
+
+    questions.add(Question(
+      question:
+          'Does your child look you in the eye when you are talking to him or her, playing with him or her, or dressing him or her?',
+    ));
+
+    questions.add(Question(
+      question: 'Does your child try to copy what you do?',
+      explanationTextSpan: TextSpan(
+        text: '\n(FOR EXAMPLE ',
+        style: const TextStyle(
+            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+        children: <TextSpan>[
+          TextSpan(
+            text: 'wave bye-bye, clap, or make a funny noise when you do)',
+            style: MimosaTextStyle.bodyText1,
+          ),
+        ],
+      ),
+    ));
+
+    questions.add(Question(
+      question:
+          'If you turn your head to look at something, does your child look around to see what you are looking at?',
+    ));
+
+    questions.add(Question(
+      question: 'Does your child try to get you to watch him or her?',
+      explanationTextSpan: TextSpan(
+        text: '\n(FOR EXAMPLE ',
+        style: const TextStyle(
+            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+        children: <TextSpan>[
+          TextSpan(
+            text:
+                'does your child look at you for praise, or say “look” or “watch me”)',
+            style: MimosaTextStyle.bodyText1,
+          ),
+        ],
+      ),
+    ));
+
+    questions.add(Question(
+      question:
+          'Does your child understand when you tell him or her to do something?',
+      explanationTextSpan: TextSpan(
+        text: '\n(FOR EXAMPLE ',
+        style: const TextStyle(
+            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+        children: <TextSpan>[
+          TextSpan(
+            text:
+                'if you don’t point, can your child understand “put the book on the chair” or “bring me the blanket”)',
+            style: MimosaTextStyle.bodyText1,
+          ),
+        ],
+      ),
+    ));
+
+    questions.add(Question(
+      question:
+          'If something new happens, does your child look at your face to see how you feel about it?',
+      explanationTextSpan: TextSpan(
+        text: '\n(FOR EXAMPLE ',
+        style: const TextStyle(
+            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+        children: <TextSpan>[
+          TextSpan(
+            text:
+                ', if he or she hears a strange or funny noise, or sees a new toy, will he or she look at your face?)',
+            style: MimosaTextStyle.bodyText1,
+          ),
+        ],
+      ),
+    ));
+
+    questions.add(Question(
+      question: 'Does your child like movement activities?',
+      explanationTextSpan: TextSpan(
+        text: '\n(FOR EXAMPLE ',
+        style: const TextStyle(
+            fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+        children: <TextSpan>[
+          TextSpan(
+            text:
+                'being swung or bounced on your knee, or does he or she run to you to be picked up and swung around?)',
+            style: MimosaTextStyle.bodyText1,
+          ),
+        ],
+      ),
+    ));
+  }
+
+  int get length => questions.length;
+
+  Question getQuestion(int index) {
+    return questions[index];
+  }
+
+  void setAnswer(int index, bool answer) async {
+    questions[index].setAnswer(answer);
+    notifyListeners();
+  }
+
+  bool? getAnswer(int index) {
+    return questions[index].getAnswer();
+  }
+
+  int getScore() {
+    int score = 0;
+    for (Question question in questions) {
+      if (question.getAnswer() == true) {
+        score++;
+      }
+    }
+    return score;
+  }
+
+  void reset() {
+    for (Question question in questions) {
+      question.setAnswer(null);
+    }
+    notifyListeners();
   }
 }

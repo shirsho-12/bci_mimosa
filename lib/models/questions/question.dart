@@ -11,7 +11,7 @@ class Question {
     this.explanationTextSpan = explanationTextSpan;
   }
 
-  void setAnswer(bool answer) {
+  void setAnswer(bool? answer) {
     this.answer = answer;
   }
 

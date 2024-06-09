@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mimosa/models/question_set.dart';
+import 'package:provider/provider.dart';
 
 //TODO: Make the sizing dynamic to orientaion
 
 class QuestionPage extends StatefulWidget {
-  QuestionPage({super.key});
-  final QuestionSet questionSet = QuestionSet();
+  const QuestionPage({super.key});
 
   @override
   State<QuestionPage> createState() => _QuestionPageState();
@@ -13,22 +13,43 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   int questionIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    double paddingSize = MediaQuery.of(context).size.height * 0.05;
+    int totalQuestions = context.read<QuestionSet>().questions.length;
+    int? total;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Mimosa: M-CHAT-R'),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(6.0),
+            child: LinearProgressIndicator(
+              // backgroundColor: Colors.red.withOpacity(0.3),
+              // valueColor: const AlwaysStoppedAnimation<Color>(Colors.red),
+              value: (questionIndex) / totalQuestions,
+            ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(32.0),
           child: Column(
             children: [
               // Display the question using RichText
-              widget.questionSet.questions[questionIndex]
-                  .createQuestionWidget(),
+              Center(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: context
+                      .read<QuestionSet>()
+                      .getQuestion(questionIndex)
+                      .createQuestionWidget(),
+                ),
+              ),
               // Display the answer options using RadioButtons
-              const SizedBox(height: 64.0),
+              SizedBox(height: paddingSize),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -37,11 +58,12 @@ class _QuestionPageState extends State<QuestionPage> {
                     child: Radio(
                       value: true,
                       groupValue:
-                          widget.questionSet.questions[questionIndex].answer,
+                          context.read<QuestionSet>().getAnswer(questionIndex),
                       onChanged: (value) {
                         setState(() {
-                          widget.questionSet.questions[questionIndex].answer =
-                              value;
+                          context
+                              .read<QuestionSet>()
+                              .setAnswer(questionIndex, value!);
                         });
                       },
                     ),
@@ -59,11 +81,12 @@ class _QuestionPageState extends State<QuestionPage> {
                     child: Radio(
                       value: false,
                       groupValue:
-                          widget.questionSet.questions[questionIndex].answer,
+                          context.read<QuestionSet>().getAnswer(questionIndex),
                       onChanged: (value) {
                         setState(() {
-                          widget.questionSet.questions[questionIndex].answer =
-                              value;
+                          context
+                              .read<QuestionSet>()
+                              .setAnswer(questionIndex, value!);
                         });
                       },
                     ),
@@ -76,7 +99,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   ),
                 ],
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.5),
+              SizedBox(height: paddingSize * 6),
               // Display the navigation buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,14 +115,14 @@ class _QuestionPageState extends State<QuestionPage> {
                     child: const Text('Previous',
                         style: TextStyle(fontSize: 24.0)),
                   ),
-                  const SizedBox(width: 32.0),
+                  SizedBox(width: paddingSize),
                   ElevatedButton(
                     onPressed: () {
-                      if (questionIndex <
-                          widget.questionSet.questions.length - 1) {
+                      if (questionIndex < totalQuestions - 1) {
                         setState(() {
-                          if (widget.questionSet.questions[questionIndex]
-                                  .answer !=
+                          if (context
+                                  .read<QuestionSet>()
+                                  .getAnswer(questionIndex) !=
                               null) {
                             questionIndex++;
                           } else {
@@ -112,6 +135,32 @@ class _QuestionPageState extends State<QuestionPage> {
                             );
                           }
                         });
+                      } else {
+                        // Calculate the total score
+                        total = context.read<QuestionSet>().getScore();
+                        // Display the total score
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Risk Score'),
+                              content: Text('Score: $total'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    // Navigate to the next screen
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/score_next_steps',
+                                      arguments: total,
+                                    );
+                                  },
+                                  child: const Text('Next'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       }
                     },
                     child: const Text('Next', style: TextStyle(fontSize: 24.0)),

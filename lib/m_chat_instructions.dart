@@ -42,10 +42,7 @@ class MChatInstructionsPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         devtools.log('Continue');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => QuestionPage()));
+                        Navigator.pushNamed(context, '/qa_page');
                       },
                       style: ElevatedButton.styleFrom(
                         // foregroundColor: Colors.white,
