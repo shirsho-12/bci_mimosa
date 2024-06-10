@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
@@ -13,9 +14,12 @@ class MChatInstructionsPage extends StatelessWidget {
         title: const Text('M-CHAT-R(TM)'),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [MimosaColors.background, MimosaColors.accent],
+            colors: [
+              MimosaColors.background,
+              MimosaColors.accent.getShadeColor(shadeValue: 15)
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
