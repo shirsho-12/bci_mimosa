@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimosa/children/face_pref_game.dart';
 import 'package:mimosa/landing_page.dart';
 import 'package:mimosa/parents/score_next_step.dart';
 import 'package:mimosa/parents/m_chat_instructions.dart';
@@ -29,7 +30,7 @@ class RouteGenerator {
       case scoreNextSteps:
         return MaterialPageRoute(builder: (_) => const ScoreNextStep());
       case facePrefGame:
-        return MaterialPageRoute(builder: (_) => const Scaffold());
+        return MaterialPageRoute(builder: (_) => const FacePreferenceGame());
       case rtnGame:
         return MaterialPageRoute(builder: (_) => const Scaffold());
 
