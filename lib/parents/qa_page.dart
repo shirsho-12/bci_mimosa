@@ -106,7 +106,8 @@ class _QuestionPageState extends State<QuestionPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(
+                  MimosaButtonSmall(
+                    buttonText: 'Previous',
                     onPressed: () {
                       if (questionIndex > 0) {
                         setState(() {
@@ -114,10 +115,10 @@ class _QuestionPageState extends State<QuestionPage> {
                         });
                       }
                     },
-                    child: const ButtonText(buttonText: 'Previous'),
                   ),
                   SizedBox(width: paddingSize),
-                  ElevatedButton(
+                  MimosaButtonSmall(
+                    buttonText: 'Next',
                     onPressed: () {
                       if (questionIndex < totalQuestions - 1) {
                         setState(() {
@@ -164,7 +165,6 @@ class _QuestionPageState extends State<QuestionPage> {
                         );
                       }
                     },
-                    child: const ButtonText(buttonText: 'Next'),
                   ),
                 ],
               ),

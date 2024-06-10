@@ -46,7 +46,7 @@ class LandingPage extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     devtools.log('For Children');
-                    Navigator.pushNamed(context, '/children');
+                    Navigator.pushNamed(context, '/children_home');
                   },
                   child: Container(
                     decoration: BoxDecoration(

@@ -43,29 +43,13 @@ class MChatInstructionsPage extends StatelessWidget {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.25),
                     // Add additional objects here to fill white space
-                    ElevatedButton(
+                    MimosaButtonSmall(
+                      buttonText: 'Continue',
                       onPressed: () {
                         devtools.log('Continue');
                         Navigator.pushNamed(context, '/qa_page');
                       },
-                      // style: ElevatedButton.styleFrom(
-                      //   // foregroundColor: Colors.white,
-                      //   // backgroundColor: Colors.blue[200],
-                      //   padding: EdgeInsets.symmetric(
-                      //     vertical: MediaQuery.of(context).size.height * 0.04,
-                      //     horizontal: MediaQuery.of(context).size.width * 0.1,
-                      //   ),
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(
-                      //         5.0), // Decreased border radius for less curved edges
-                      //   ),
-                      //   textStyle: MimosaTextStyle.headline2,
-                      // ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: ButtonText(buttonText: 'Continue'),
-                      ),
-                    )
+                    ),
                   ],
                 ),
               ),
