@@ -1,4 +1,6 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:mimosa/app_ui.dart';
 import 'package:mimosa/models/question_set.dart';
 import 'package:mimosa/routes.dart';
 import 'package:provider/provider.dart';
@@ -13,17 +15,56 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final FlexSchemeColor schemeLight = FlexSchemeColor.from(
+      primary: MimosaColors.primary,
+      secondary: MimosaColors.secondary,
+      tertiary: MimosaColors.accent,
+      brightness: Brightness.light,
+    );
+    const double appBarElevation = 0.5;
+    const double appBarOpacity = 0.94;
+    const bool swapColors = true;
+    const FlexKeyColors keyColors = FlexKeyColors(
+      useKeyColors: false, // <-- set to true enable M3 seeded ColorScheme.
+      useSecondary: true,
+      useTertiary: true,
+      keepPrimary:
+          false, // <-- Keep defined value, do not use the seeded result.
+      keepPrimaryContainer: false,
+      keepSecondary: false,
+      keepSecondaryContainer: false,
+      keepTertiary: false,
+      keepTertiaryContainer: false,
+    );
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => QuestionSet()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Mimosa',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: FlexColorScheme.light(
+          colors: schemeLight,
+          appBarElevation: appBarElevation,
+          appBarOpacity: appBarOpacity,
+          appBarStyle: FlexAppBarStyle.primary,
+          tooltipsMatchBackground: true,
+          swapColors: swapColors,
+          visualDensity: FlexColorScheme.comfortablePlatformDensity,
+          keyColors: keyColors,
+        ).toTheme, //.copyWith(
+        //   elevatedButtonTheme: ElevatedButtonThemeData(
+        //     style: ElevatedButton.styleFrom(
+        //       elevation: 0,
+        //       backgroundColor: MimosaColors.secondary,
+        //       shape: const RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.all(Radius.circular(10)),
+        //       ),
+        //       fixedSize: const Size(208, 54),
+        //     ),
+        //   ),
+        // ),
         initialRoute: RouteGenerator.homepage,
         onGenerateRoute: RouteGenerator.generateRoute,
       ),

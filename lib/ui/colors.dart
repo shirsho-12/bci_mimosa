@@ -26,12 +26,6 @@ abstract class MimosaColors {
   /// Transparent
   static const Color transparent = Color(0x00000000);
 
-  /// Primary
-  static const Color primary = Color(0xFF0000FF);
-
-  /// Secondary
-  static const Color secondary = Color(0xFFFB5246);
-
   /// Green
   static const Color green = Color(0xFF3fBC5C);
 
@@ -40,4 +34,19 @@ abstract class MimosaColors {
 
   /// Charcoal
   static const Color charcoal = Color(0xBF202124);
+
+  /// Primary
+  static const Color primary = Color.fromRGBO(215, 146, 52, 1);
+
+  /// Secondary
+  static const Color secondary = Color.fromRGBO(239, 189, 120, 1);
+
+  /// Accent
+  static const Color accent = Color.fromRGBO(246, 172, 71, 1);
+
+  /// background
+  static const Color background = Color.fromRGBO(253, 250, 246, 1);
+
+  /// text
+  static const Color text = Color.fromRGBO(13, 10, 5, 1);
 }

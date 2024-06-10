@@ -6,7 +6,7 @@ class MimosaTextStyle {
   static const _baseTextStyle = TextStyle(
     package: 'app_ui',
     fontFamily: 'OpenSans',
-    color: MimosaColors.black,
+    color: MimosaColors.text,
     fontWeight: MimosaFontWeight.regular,
   );
 

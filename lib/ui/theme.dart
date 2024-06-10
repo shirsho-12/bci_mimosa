@@ -14,7 +14,7 @@ class MimosaTheme {
       elevatedButtonTheme: _elevatedButtonTheme,
       outlinedButtonTheme: _outlinedButtonTheme,
       textTheme: _textTheme,
-      dialogBackgroundColor: MimosaColors.whiteBackground,
+      dialogBackgroundColor: MimosaColors.background,
       dialogTheme: _dialogTheme,
       tooltipTheme: _tooltipTheme,
       bottomSheetTheme: _bottomSheetTheme,
@@ -145,14 +145,14 @@ class MimosaTheme {
   }
 
   static AppBarTheme get _appBarTheme {
-    return const AppBarTheme(color: MimosaColors.primary);
+    return const AppBarTheme(color: MimosaColors.background);
   }
 
   static ElevatedButtonThemeData get _elevatedButtonTheme {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        backgroundColor: MimosaColors.primary,
+        backgroundColor: MimosaColors.secondary,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
@@ -164,11 +164,11 @@ class MimosaTheme {
   static OutlinedButtonThemeData get _outlinedButtonTheme {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: MimosaColors.white,
+        foregroundColor: MimosaColors.background,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30)),
         ),
-        side: const BorderSide(color: MimosaColors.white, width: 2),
+        side: const BorderSide(color: MimosaColors.accent, width: 2),
         fixedSize: const Size(208, 54),
       ),
     );
@@ -181,7 +181,7 @@ class MimosaTheme {
         borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       padding: EdgeInsets.all(10),
-      textStyle: TextStyle(color: MimosaColors.white),
+      textStyle: TextStyle(color: MimosaColors.text),
     );
   }
 
@@ -195,7 +195,7 @@ class MimosaTheme {
 
   static BottomSheetThemeData get _bottomSheetTheme {
     return const BottomSheetThemeData(
-      backgroundColor: MimosaColors.whiteBackground,
+      backgroundColor: MimosaColors.background,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),

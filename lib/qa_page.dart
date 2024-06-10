@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimosa/app_ui.dart';
 import 'package:mimosa/models/question_set.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,8 @@ class _QuestionPageState extends State<QuestionPage> {
             preferredSize: const Size.fromHeight(6.0),
             child: LinearProgressIndicator(
               // backgroundColor: Colors.red.withOpacity(0.3),
-              // valueColor: const AlwaysStoppedAnimation<Color>(Colors.red),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(MimosaColors.accent),
               value: (questionIndex) / totalQuestions,
             ),
           ),
@@ -112,8 +114,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         });
                       }
                     },
-                    child: const Text('Previous',
-                        style: TextStyle(fontSize: 24.0)),
+                    child: const ButtonText(buttonText: 'Previous'),
                   ),
                   SizedBox(width: paddingSize),
                   ElevatedButton(
@@ -163,7 +164,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         );
                       }
                     },
-                    child: const Text('Next', style: TextStyle(fontSize: 24.0)),
+                    child: const ButtonText(buttonText: 'Next'),
                   ),
                 ],
               ),
