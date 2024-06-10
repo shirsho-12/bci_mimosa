@@ -1,0 +1,93 @@
+questions:
+  - 1: If you point at something across the room, does your child look at it?
+    prompt: If you point at something, what does your child do?
+    pretext: Does he/she
+    subquestions:
+      - q: Looks at object
+        type: pass
+      - q: Points to object
+        type: pass
+      - q: Looks and comments on object
+        type: pass
+      - q: Looks if parent points and says "look!"
+        type: pass
+      - q: Ignores parent
+        type: fail
+      - q: Looks around room randomly
+        type: fail
+      - q: Looks at parent's finger
+        type: fail
+    pass: passYesAll, failNoNone
+    follow-up: While one does he/she do most often?
+      on: mixed 
+  - 2: You reported that you have wondered if you child is deaf. What led you to wonder that? 
+    pretext: Does he/she...
+    subquestions:
+    - q: Often ignore sounds?
+      type: na
+    - q: Often ignore people?
+      type: na
+    pass: no-all
+    follow-up: Has your child's hearing been tested?
+      on: yes
+      follow-up: What were the results of the hearing test? (choose one)
+        on: yes
+    
+  - 3: Does your child play pretend or make-believe?
+    pretext: Does he/she ever...
+    subquestions:
+    - q: Present to drink from a toy cup?
+      type: pass
+    - q: Pretend to eat from a toy spoon or fork?
+      type: pass
+    - q: Pretend to talk on the telephone?
+      type: pass
+    - q: Pretend to feed a doll or stuffed animal with real or imaginary food?
+      type: pass
+    - q: Push a car as if it is going along a pretend road?
+      type: pass
+    - q: Pretend to be a robot, an airplane, a ballerina, or any other favorite character?
+      type: pass
+    - q: Put a toy pot on a pretend stove?
+      type: pass
+    - q: Stir imaginary food?
+      type: pass
+    - q: Put an action figure or doll into a car or truck as if it is the driver or passenger?
+      type: pass
+    - q: Pretend to vacuum the rug, sweep the floor, or the mow lawn?
+    pass: yes-any
+
+  - 4: Does your child  like climbing on things?
+    pretext: Does he/she enjoy climbing on...
+    subquestions:
+    - q: Furniture?
+      type: pass
+    - q: Stairs?
+      type: pass
+    - q: Chairs?
+      type: pass
+    - q: Playground equipment?
+      type: pass
+    pass: yes-any
+    
+  - 5: Does your child make unusual finger movements near his/her face?
+    pretext: Does he/she ever...
+    subquestions:
+    - q: Look at hands?
+      type: pass
+    - q: Move fingers when playing peek-a-boo?
+      type: pass
+    - q: Wiggle his/her fingers near his/her eyes?
+      type: fail
+    - q: Hold his/her hands up close to his/her eyes?
+      type: fail
+    - q: Hold his/her hands off to the side of his/her face?
+      type: fail
+    - q: Flap his/her hands near his/her face?
+      type: fail
+    pass: pass-yes-any, fail-no-all
+    follow-up: Does this happen more than twice a week?
+      on: fail-yes-any
+      pass: no
+  - 6: Does your child point with one finger to ask for something or to get help?
+    prompt: If there is something your child wants that is out of reach, such as a snack or toy that is out of reach, how does he/she get it?

@@ -14,3 +14,14 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+Notes (10 June 2024):
+
+- Single gender avatar
+- Bibi's Home = response to name task
+  - Spatially aligned audio (left to left audio)
+  - distraction from the other side
+  - Avatar says child's name
+- Face preference task (Psych Toolbox):
+  - Animation between images
+  - Image duration 5s

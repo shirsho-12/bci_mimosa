@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
-import 'package:mimosa/qa_page.dart';
-
 class MChatInstructionsPage extends StatelessWidget {
   const MChatInstructionsPage({super.key});
 

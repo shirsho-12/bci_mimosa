@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mimosa/app_ui.dart';
 
-import 'questions/question.dart';
+import 'questions/phase_one_question.dart';
 
 class QuestionSet extends ChangeNotifier {
-  List<Question> questions = <Question>[];
+  List<PhaseOneQuestion> questions = <PhaseOneQuestion>[];
 
   QuestionSet() {
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question:
             'If you point at something across the room, does your child look at it?',
         explanationTextSpan: TextSpan(
@@ -28,13 +28,13 @@ class QuestionSet extends ChangeNotifier {
     );
 
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question: 'Have you ever wondered if your child might be deaf?',
       ),
     );
 
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question: 'Does your child play pretend or make-believe?',
         explanationTextSpan: TextSpan(
           text: '\n(FOR EXAMPLE ',
@@ -52,7 +52,7 @@ class QuestionSet extends ChangeNotifier {
     );
 
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question: 'Does your child like climbing on things?',
         explanationTextSpan: TextSpan(
           text: '\n(FOR EXAMPLE ',
@@ -69,7 +69,7 @@ class QuestionSet extends ChangeNotifier {
     );
 
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question: 'Does your child make ',
         explanationTextSpan: TextSpan(
           text: 'unusual',
@@ -104,7 +104,7 @@ class QuestionSet extends ChangeNotifier {
     );
 
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question:
             'Does your child point with one finger to ask for something or to get help?',
         explanationTextSpan: TextSpan(
@@ -121,7 +121,7 @@ class QuestionSet extends ChangeNotifier {
       ),
     );
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question:
             'Does your child point with one finger to show you something interesting?',
         explanationTextSpan: TextSpan(
@@ -139,7 +139,7 @@ class QuestionSet extends ChangeNotifier {
       ),
     );
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question: 'Is your child interested in other children?',
         explanationTextSpan: TextSpan(
           text: '\n(FOR EXAMPLE ',
@@ -156,7 +156,7 @@ class QuestionSet extends ChangeNotifier {
       ),
     );
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question:
             'Does your child show you things by bringing them to you or holding them up for you to see – not to get help, but just to share?',
         explanationTextSpan: TextSpan(
@@ -173,7 +173,7 @@ class QuestionSet extends ChangeNotifier {
       ),
     );
     questions.add(
-      Question(
+      PhaseOneQuestion(
         question: 'Does your child respond when you call his or her name?',
         explanationTextSpan: TextSpan(
           text: '\n(FOR EXAMPLE ',
@@ -190,12 +190,12 @@ class QuestionSet extends ChangeNotifier {
       ),
     );
     questions.add(
-      Question(
+      PhaseOneQuestion(
           question:
               'When you smile at your child, does he or she smile back at you?'),
     );
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question: 'Does your child get upset by everyday noises?',
       explanationTextSpan: TextSpan(
         text: '\n(FOR EXAMPLE ',
@@ -210,16 +210,16 @@ class QuestionSet extends ChangeNotifier {
       ),
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question: 'Does your child walk?',
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question:
           'Does your child look you in the eye when you are talking to him or her, playing with him or her, or dressing him or her?',
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question: 'Does your child try to copy what you do?',
       explanationTextSpan: TextSpan(
         text: '\n(FOR EXAMPLE ',
@@ -234,12 +234,12 @@ class QuestionSet extends ChangeNotifier {
       ),
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question:
           'If you turn your head to look at something, does your child look around to see what you are looking at?',
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question: 'Does your child try to get you to watch him or her?',
       explanationTextSpan: TextSpan(
         text: '\n(FOR EXAMPLE ',
@@ -255,7 +255,7 @@ class QuestionSet extends ChangeNotifier {
       ),
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question:
           'Does your child understand when you tell him or her to do something?',
       explanationTextSpan: TextSpan(
@@ -272,7 +272,7 @@ class QuestionSet extends ChangeNotifier {
       ),
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question:
           'If something new happens, does your child look at your face to see how you feel about it?',
       explanationTextSpan: TextSpan(
@@ -289,7 +289,7 @@ class QuestionSet extends ChangeNotifier {
       ),
     ));
 
-    questions.add(Question(
+    questions.add(PhaseOneQuestion(
       question: 'Does your child like movement activities?',
       explanationTextSpan: TextSpan(
         text: '\n(FOR EXAMPLE ',
@@ -308,7 +308,7 @@ class QuestionSet extends ChangeNotifier {
 
   int get length => questions.length;
 
-  Question getQuestion(int index) {
+  PhaseOneQuestion getQuestion(int index) {
     return questions[index];
   }
 
@@ -323,7 +323,7 @@ class QuestionSet extends ChangeNotifier {
 
   int getScore() {
     int score = 0;
-    for (Question question in questions) {
+    for (PhaseOneQuestion question in questions) {
       if (question.getAnswer() == true) {
         score++;
       }
@@ -332,7 +332,7 @@ class QuestionSet extends ChangeNotifier {
   }
 
   void reset() {
-    for (Question question in questions) {
+    for (PhaseOneQuestion question in questions) {
       question.setAnswer(null);
     }
     notifyListeners();

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Question {
+class PhaseOneQuestion {
   String question;
   TextSpan? explanationTextSpan;
   bool? answer;
 
-  Question({required this.question, this.explanationTextSpan});
+  PhaseOneQuestion({required this.question, this.explanationTextSpan});
 
   void setExplanationTextSpan(TextSpan explanationTextSpan) {
     this.explanationTextSpan = explanationTextSpan;
