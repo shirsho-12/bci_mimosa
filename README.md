@@ -1,21 +1,10 @@
-# mimosa
+# Mimosa
 
 MIMOSA Study Prototype App
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-Notes (10 June 2024):
+### Notes (10 June 2024):
 
 - Single gender avatar
 - Bibi's Home = response to name task
@@ -25,3 +14,18 @@ Notes (10 June 2024):
 - Face preference task (Psych Toolbox):
   - Animation between images
   - Image duration 5s
+
+Tofu's Bag
+
+- Warning sign
+- Tofu's Bag writing
+- Bag shakes, opens, image
+- marbles, next image
+- repeat 4 times
+- bag closes, balloons
+
+1. Tofu's Bag
+2. Bag gets closer, (see what's inside), bag opens
+3. Image
+4. Marbles
+5. Repeat 4 times, bag closes, balloons

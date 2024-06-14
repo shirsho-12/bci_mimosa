@@ -13,7 +13,7 @@ class _FacePreferenceGameState extends State<FacePreferenceGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Mimosa"),
+        title: const Text("Mimosa - Tofu's Bag"),
       ),
       body: Center(
         child: Column(
