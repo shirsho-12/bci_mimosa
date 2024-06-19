@@ -4,7 +4,7 @@ import 'dart:math' as math;
 import 'dart:developer' as devtools show log;
 
 import 'package:flutter/material.dart';
-import 'package:mimosa/models/image_data.dart';
+import 'package:mimosa/models/image_data.dart' as ImageData;
 export 'responsive_layout_builder.dart';
 
 /// Steps:
@@ -15,7 +15,7 @@ export 'responsive_layout_builder.dart';
 /// level complete animation - balloons
 /// level two starts
 
-// List<int> rotations = [0, 15, -15, 0];
+// TODO: Implement fix, use a stack instead of an animation to change images
 
 class ChildrenGameAnimation extends StatefulWidget {
   final double width;
@@ -29,177 +29,137 @@ class ChildrenGameAnimation extends StatefulWidget {
 
 class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
     with TickerProviderStateMixin {
-  late AnimationController _scaleController;
-  late AnimationController _rotationController;
-  late AnimationController _bagOpenController;
-  int numRotations = 0;
+  late AnimationController controller;
+  String imagePath = ImageData.bagImage;
+  late Animation<double> size;
+  late Animation<double> rotate;
+  late Animation<String> image;
+  final int duration = 5;
+
+  late List<double> durationValues;
+
+  void _setDurationValues() {
+    List<int> durationsInSeconds = [
+      0, // start
+      2, // scale up
+      4, // rotate
+      2, // half-open bag
+      2, // open bag
+    ];
+    double total = durationsInSeconds.reduce((a, b) => a + b).toDouble();
+    durationValues = durationsInSeconds.map((e) => e / total).toList();
+  }
 
   @override
   void initState() {
     super.initState();
-    _scaleController = AnimationController(
+    _setDurationValues();
+    controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 4000),
+      duration: Duration(seconds: duration),
+    )..forward();
+    size = Tween<double>(
+      begin: 0.7,
+      end: 1,
+    ).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: Interval(durationValues[0], durationValues[1],
+            curve: Curves.easeInOut),
+      ),
     );
-    _rotationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 2000),
+    rotate = Tween<double>(
+      begin: 0.0,
+      end: 2 * math.pi,
+    ).animate(CurvedAnimation(
+        parent: controller,
+        curve: Interval(
+          durationValues[1],
+          durationValues[2],
+          curve: Curves.easeInOut,
+        )));
+
+    image = TweenSequence<String>(<TweenSequenceItem<String>>[
+      TweenSequenceItem<String>(
+        tween: ConstantTween<String>(ImageData.bagImage),
+        weight: 1 - durationValues[3] - durationValues[4],
+      ),
+      TweenSequenceItem<String>(
+        tween: ConstantTween<String>(ImageData.bagOpeningImages[0]),
+        weight: durationValues[3],
+      ),
+      TweenSequenceItem<String>(
+        tween: ConstantTween<String>(ImageData.bagOpeningImages[1]),
+        weight: durationValues[4],
+      ),
+    ]).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: const Interval(
+          0.0,
+          1.0,
+          curve: Curves.linear,
+        ),
+      ),
     );
-    _bagOpenController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 2000),
-    );
-    _startScaleAnimation();
-    _startRotationAnimation();
   }
 
   @override
   void dispose() {
-    _scaleController.dispose();
-    _rotationController.dispose();
-    _bagOpenController.dispose();
+    // _scaleController.dispose();
+    // _rotationController.dispose();
+    // _bagOpenController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
-  Future _startScaleAnimation() async {
-    devtools.log('Starting scale animation');
+  Stream<AnimationStatus> getStatus() async* {
     try {
-      await _scaleController.forward().orCancel;
-      // await _scaleController.reverse().orCancel;
-      // await _startRotationAnimation();
-    } on TickerCanceled {
-      // the animation got canceled, probably because we were disposed
-      devtools.log('Animation got canceled');
-    }
-  }
-
-  Future _startRotationAnimation() async {
-    devtools.log('Starting rotation animation');
-    try {
-      await _rotationController.forward().orCancel;
-      await _rotationController.reverse().orCancel;
-      setState(() {
-        numRotations++;
-      });
-      if (numRotations < 2) {
-        _startRotationAnimation();
-      } else {
-        _rotationController.stop();
-        await _startBagOpenAnimation();
-      }
-    } on TickerCanceled {
-      // the animation got canceled, probably because we were disposed
-      devtools.log('Animation got canceled');
-    }
-  }
-
-  Future _startBagOpenAnimation() async {
-    devtools.log('Starting bag open animation');
-    try {
-      await _bagOpenController.forward().orCancel;
-    } on TickerCanceled {
-      // the animation got canceled, probably because we were disposed
-      devtools.log('Animation got canceled');
+      yield controller.status;
+    } catch (e) {
+      devtools.log(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return GameAnimationStack(
-        scaleController: _scaleController,
-        rotationController: _rotationController,
-        bagOpenController: _bagOpenController,
-        width: widget.width,
-        height: widget.height);
-  }
-}
-
-class GameAnimationStack extends StatefulWidget {
-  final double width;
-  final double height;
-  final Animation<double> _rotationController;
-  final Animation<double> _bagOpenController;
-  final Animation<double> _scaleController;
-  // final Animation<double> _rotationController;
-
-  GameAnimationStack(
-      {super.key,
-      required this.width,
-      required this.height,
-      required Animation<double> scaleController,
-      required Animation<double> rotationController,
-      required Animation<double> bagOpenController})
-      : _rotationController = rotationController,
-        _bagOpenController = bagOpenController,
-        _scaleController = scaleController;
-
-  late final Animation<double> scaleAnimation = Tween<double>(
-    begin: 0.7,
-    end: 1,
-  ).animate(CurvedAnimation(
-    parent: _scaleController,
-    curve: Curves.easeInOut,
-  ));
-  late final Animation<double> rotationAnimation = Tween<double>(
-    begin: -0.3,
-    end: 0.3,
-  ).animate(CurvedAnimation(
-    parent: _rotationController,
-    curve: Curves.easeInOut,
-  ));
-
-  late final AnimatedSwitcher bagOpenAnimation = AnimatedSwitcher(
-      duration: const Duration(milliseconds: 2000),
-      child: _bagOpenController.isCompleted
-          ? Image.asset(bagOpeningImages[1], width: width, height: height)
-          : Image.asset(bagOpeningImages[0], width: width, height: height));
-  int index = 0;
-
-  @override
-  State<GameAnimationStack> createState() => _GameAnimationStackState();
-}
-
-class _GameAnimationStackState extends State<GameAnimationStack> {
-  @override
-  Widget build(BuildContext context) {
-    if (widget._scaleController.isCompleted) {
-      setState(() {
-        widget.index = 1;
-      });
-    }
-    if (widget._bagOpenController.isCompleted) {
-      setState(() {
-        // widget.index = 2;
-      });
-    }
     return Stack(
       children: [
-        // !_rotationController.isCompleted
-        widget.index == 0
-            ? AnimatedBuilder(
-                animation: widget._rotationController,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: widget.scaleAnimation.value,
-                    child: Transform.rotate(
-                      angle: widget.rotationAnimation.value,
-                      child: Image.asset(
-                        bagImage,
-                        width: widget.width,
-                        height: widget.height,
-                      ),
-                    ),
-                  );
-                },
-              )
-            : AnimatedSwitcher(
-                duration: const Duration(milliseconds: 2000),
-                key: UniqueKey(),
-                child: widget._bagOpenController.isCompleted
-                    ? Image.asset(bagOpeningImages[1],
-                        width: widget.width, height: widget.height)
-                    : Image.asset(bagOpeningImages[0],
-                        width: widget.width, height: widget.height)),
+        Center(
+          child: AnimatedBuilder(
+              animation: controller,
+              builder: (context, child) {
+                return Container(
+                  width: widget.width,
+                  height: widget.height,
+                  transform: Matrix4.identity()
+                    ..translate(widget.width / 2, widget.height / 2)
+                    ..scale(size.value)
+                    ..rotateY(rotate.value)
+                    ..rotateZ(rotate.value)
+                    ..translate(-widget.width / 2, -widget.height / 2),
+                  // ..rotateZ(rotate.value),
+                  child: Image.asset(
+                    image.value,
+                    // width: widget.width * size.value,
+                    // height: widget.height * size.value,
+                    alignment: Alignment.center,
+                  ),
+                );
+              }),
+        ),
+        FutureBuilder(
+            future: Future.delayed(Duration(seconds: duration)),
+            builder: (context, snapshot) {
+              devtools.log(snapshot.connectionState.toString());
+              return snapshot.connectionState == ConnectionState.done
+                  ? Positioned(
+                      top: widget.height / 2,
+                      right: widget.width / 2,
+                      child: const Text("WELL WELL WELL",
+                          style: TextStyle(fontSize: 30, color: Colors.red)))
+                  : Container();
+            }),
       ],
     );
   }

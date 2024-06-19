@@ -96,9 +96,9 @@ flutter:
   assets:
     - assets/yml/p_two_questions.yaml
     - assets/images/face_pref/
-    - assets/images/face_pref/level_1
-    - assets/images/face_pref/level_2
-    - assets/images/face_pref/level_3
+    - assets/images/face_pref/level_1/
+    - assets/images/face_pref/level_2/
+    - assets/images/face_pref/level_3/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
