@@ -53,3 +53,8 @@ List<String> levelThreeImagesF = [
   'assets/images/face_pref/level_3/F7.png',
   'assets/images/face_pref/level_3/F8.png'
 ];
+
+List<String> balloonImages = [
+  'assets/images/face_pref/bag_balloon1.png',
+  'assets/images/face_pref/bag_balloon2.png',
+];

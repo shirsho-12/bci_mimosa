@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'dart:developer' as devtools show log;
 
 import 'package:flutter/material.dart';
+import 'package:mimosa/models/constants.dart';
 import 'package:mimosa/models/image_data.dart' as ImageData;
 export 'responsive_layout_builder.dart';
 
@@ -30,22 +31,15 @@ class ChildrenGameAnimation extends StatefulWidget {
 class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
     with TickerProviderStateMixin {
   late AnimationController controller;
-  String imagePath = ImageData.bagImage;
+  late String imagePath;
   late Animation<double> size;
   late Animation<double> rotate;
   late Animation<String> image;
-  final int duration = 5;
 
   late List<double> durationValues;
 
   void _setDurationValues() {
-    List<int> durationsInSeconds = [
-      0, // start
-      2, // scale up
-      4, // rotate
-      2, // half-open bag
-      2, // open bag
-    ];
+    List<int> durationsInSeconds = Constants.durationsInSeconds;
     double total = durationsInSeconds.reduce((a, b) => a + b).toDouble();
     durationValues = durationsInSeconds.map((e) => e / total).toList();
   }
@@ -56,7 +50,7 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
     _setDurationValues();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: duration),
+      duration: Duration(seconds: Constants.initDuration),
     )..forward();
     size = Tween<double>(
       begin: 0.7,
@@ -106,9 +100,6 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
 
   @override
   void dispose() {
-    // _scaleController.dispose();
-    // _rotationController.dispose();
-    // _bagOpenController.dispose();
     controller.dispose();
     super.dispose();
   }
@@ -141,26 +132,299 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
                   // ..rotateZ(rotate.value),
                   child: Image.asset(
                     image.value,
-                    // width: widget.width * size.value,
-                    // height: widget.height * size.value,
                     alignment: Alignment.center,
                   ),
                 );
               }),
         ),
-        FutureBuilder(
-            future: Future.delayed(Duration(seconds: duration)),
-            builder: (context, snapshot) {
-              devtools.log(snapshot.connectionState.toString());
-              return snapshot.connectionState == ConnectionState.done
-                  ? Positioned(
-                      top: widget.height / 2,
-                      right: widget.width / 2,
-                      child: const Text("WELL WELL WELL",
-                          style: TextStyle(fontSize: 30, color: Colors.red)))
-                  : Container();
-            }),
+        Center(
+          child: FutureBuilder(
+              future: Future.delayed(Duration(seconds: Constants.initDuration)),
+              builder: (context, snapshot) {
+                devtools.log(snapshot.connectionState.toString());
+                return snapshot.connectionState == ConnectionState.done
+                    ? GameAnimation(
+                        width: widget.width, height: widget.height, level: 1)
+                    : Container();
+              }),
+        ),
       ],
     );
+  }
+}
+
+class GameAnimation extends StatefulWidget {
+  const GameAnimation({
+    super.key,
+    required this.width,
+    required this.height,
+    required this.level,
+    this.gender,
+  });
+  final double width;
+  final double height;
+  final int level;
+  final String? gender;
+
+  @override
+  State<GameAnimation> createState() => _GameAnimationState();
+}
+
+class _GameAnimationState extends State<GameAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late List<AssetImage> imageList;
+  late Animation<AssetImage?> image;
+
+  @override
+  void initState() {
+    super.initState();
+    List<String> images;
+    switch (widget.level) {
+      case 1:
+        images = ImageData.levelOneImages;
+        break;
+      case 2:
+        switch (widget.gender) {
+          case 'M':
+            images = ImageData.levelTwoImagesM;
+            break;
+          case 'F':
+            images = ImageData.levelTwoImagesF;
+            break;
+          default:
+            images = ImageData.levelTwoImagesM;
+        }
+        break;
+      case 3:
+        switch (widget.gender) {
+          case 'M':
+            images = ImageData.levelThreeImagesM;
+            break;
+          case 'F':
+            images = ImageData.levelThreeImagesF;
+            break;
+          default:
+            images = ImageData.levelThreeImagesM;
+        }
+        break;
+      default:
+        images = ImageData.levelOneImages;
+    }
+
+    List<AssetImage> imageList = images
+        .map((e) => AssetImage(e))
+        .toList()
+        .cast<AssetImage>(); // cast to AssetImage
+
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: Constants.gameDuration),
+    )..forward();
+    double transitionWeight =
+        Constants.transitionWeight / (imageList.length * 2 - 1);
+    double imageWeight = Constants.imageWeight / (imageList.length * 2 - 1);
+
+    image = TweenSequence<AssetImage?>(<TweenSequenceItem<AssetImage?>>[
+      for (int i = 0; i < imageList.length * 2 - 1; i++)
+        i % 2 == 1
+            ? TweenSequenceItem<AssetImage?>(
+                tween: ConstantTween<AssetImage?>(null),
+                weight: transitionWeight,
+              )
+            : TweenSequenceItem<AssetImage>(
+                tween: ConstantTween<AssetImage>(imageList[i ~/ 2]),
+                weight: imageWeight,
+              ),
+    ]).animate(
+      CurvedAnimation(
+        parent: controller,
+        curve: const Interval(
+          0.0,
+          1.0,
+          curve: Curves.linear,
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: Future.delayed(Duration(seconds: Constants.gameDuration)),
+        builder: (context, snapshot) {
+          devtools.log("second state ${snapshot.connectionState.toString()}");
+          if (snapshot.connectionState == ConnectionState.done) {
+            return LevelEndAnimation(
+              width: widget.width,
+              height: widget.height,
+              level: widget.level,
+              time: Constants.transitionDuration,
+            );
+          }
+          return AnimatedBuilder(
+              animation: controller,
+              builder: (context, child) {
+                if (image.value == null) {
+                  return MarbleAnimation(
+                    time: Constants.imageDuration,
+                    width: widget.width,
+                    height: widget.height,
+                  );
+                }
+                return SizedBox(
+                  width: widget.width,
+                  height: widget.height,
+                  child: Image(image: image.value!),
+                );
+              });
+        });
+  }
+}
+
+class MarbleAnimation extends StatefulWidget {
+  const MarbleAnimation(
+      {super.key,
+      required this.width,
+      required this.height,
+      required this.time});
+  final double width;
+  final double height;
+  final int time;
+
+  @override
+  State<MarbleAnimation> createState() => _MarbleAnimationState();
+}
+
+class _MarbleAnimationState extends State<MarbleAnimation> {
+  int index = 0;
+  late List<AssetImage> images;
+  late Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    images = ImageData.transitionAnimationImages
+        .map((e) => AssetImage(e))
+        .toList()
+        .cast<AssetImage>();
+    timer = Timer.periodic(
+        Duration(milliseconds: (widget.time * 1000) ~/ images.length), (timer) {
+      setState(() {
+        index++;
+        if (index == images.length) {
+          index = 0;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // update index every 1/6th of the time
+
+    return Stack(
+      children: [
+        Center(
+            child: Image(
+                image: images[0], width: widget.width, height: widget.height)),
+        Center(
+          child: Image(
+              image: images[index], width: widget.width, height: widget.height),
+        ),
+      ],
+    );
+  }
+}
+
+class LevelEndAnimation extends StatefulWidget {
+  const LevelEndAnimation(
+      {super.key,
+      required this.width,
+      required this.height,
+      required this.level,
+      required this.time});
+  final double width;
+  final double height;
+  final int level;
+  final int time;
+
+  @override
+  State<LevelEndAnimation> createState() => _LevelEndAnimationState();
+}
+
+class _LevelEndAnimationState extends State<LevelEndAnimation> {
+  int index = 0;
+  int loop = 0;
+  late List<AssetImage> images;
+  late Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    images = ImageData.balloonImages
+        .map((e) => AssetImage(e))
+        .toList()
+        .cast<AssetImage>();
+    // double the speed
+    timer = Timer.periodic(
+        Duration(milliseconds: (widget.time * 500) ~/ images.length), (timer) {
+      setState(() {
+        index++;
+        if (index == images.length) {
+          index = 0;
+          if (widget.level < Constants.maxLevel) {
+            loop++;
+          }
+        }
+        if (loop == 5) {
+          timer.cancel();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // update index every 1/6th of the time
+
+    return loop != 5
+        ? Stack(
+            children: [
+              Center(
+                  child: Image(
+                      image: images[0],
+                      width: widget.width,
+                      height: widget.height)),
+              Center(
+                child: Image(
+                    image: images[index],
+                    width: widget.width,
+                    height: widget.height),
+              ),
+            ],
+          )
+        : GameAnimation(
+            width: widget.width,
+            height: widget.height,
+            level: widget.level + 1);
   }
 }
