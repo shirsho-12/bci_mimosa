@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimosa/models/constants.dart';
 import 'package:mimosa/models/question_set.dart';
 import 'package:provider/provider.dart';
 
@@ -10,11 +11,11 @@ class ScoreNextStep extends StatelessWidget {
     String risklevel = '';
     String caseString = ''; // Contains explanation of risk level and next steps
     int score = context.read<QuestionSet>().getScore();
-    if (score < 3) {
+    if (score < Constants.lowRisk) {
       risklevel = 'low';
       caseString =
           'If your child is under 24 months, schedule a follow-up screening after their second birthday. No further action is needed at this time.';
-    } else if (score < 8) {
+    } else if (score < Constants.mediumRisk) {
       risklevel = 'medium';
       caseString = 'Please continue to the next stage of the screening.';
     } else {
@@ -45,7 +46,7 @@ class ScoreNextStep extends StatelessWidget {
                 ? ElevatedButton(
                     onPressed: () {
                       // context.read<QuestionSet>().reset();
-                      Navigator.pushNamed(context, '/phase_two');
+                      Navigator.pushNamed(context, '/phase_two_instructions');
                     },
                     child: const Text(
                         'Continue to the next stage of the screening'),

@@ -4,14 +4,14 @@ import 'dart:developer' as devtools show log;
 
 import 'package:mimosa/app_ui.dart';
 
-class MChatInstructionsPage extends StatelessWidget {
-  const MChatInstructionsPage({super.key});
+class PhaseTwoInstructions extends StatelessWidget {
+  const PhaseTwoInstructions({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('M-CHAT-R(TM)'),
+        title: const Text('Phase Two Instructions'),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class MChatInstructionsPage extends StatelessWidget {
                       buttonText: 'Continue',
                       onPressed: () {
                         devtools.log('Continue');
-                        Navigator.pushNamed(context, '/phase_one');
+                        Navigator.pushNamed(context, '/phase_two');
                       },
                     ),
                   ],

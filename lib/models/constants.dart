@@ -16,4 +16,7 @@ class Constants {
       transitionDuration / (transitionDuration + imageDuration);
   static double imageWeight =
       imageDuration / (transitionDuration + imageDuration);
+
+  static int lowRisk = 3;
+  static int mediumRisk = 8;
 }

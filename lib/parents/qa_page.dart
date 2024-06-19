@@ -5,14 +5,14 @@ import 'package:provider/provider.dart';
 
 //TODO: Make the sizing dynamic to orientaion
 
-class QuestionPage extends StatefulWidget {
-  const QuestionPage({super.key});
+class PhaseOne extends StatefulWidget {
+  const PhaseOne({super.key});
 
   @override
-  State<QuestionPage> createState() => _QuestionPageState();
+  State<PhaseOne> createState() => _PhaseOneState();
 }
 
-class _QuestionPageState extends State<QuestionPage> {
+class _PhaseOneState extends State<PhaseOne> {
   int questionIndex = 0;
 
   @override
