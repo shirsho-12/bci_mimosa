@@ -29,3 +29,11 @@ Tofu's Bag
 3. Image
 4. Marbles
 5. Repeat 4 times, bag closes, balloons
+
+Bibi's Home
+
+- Person to left/right
+- Object falls on opposite side
+- Person moves to center
+- Person looks left, forward, top left, up, top right, down, points to sides
+- 6 directions with objects on each side

@@ -53,18 +53,11 @@ class MyApp extends StatelessWidget {
           swapColors: swapColors,
           visualDensity: FlexColorScheme.comfortablePlatformDensity,
           keyColors: keyColors,
-        ).toTheme, //.copyWith(
-        //   elevatedButtonTheme: ElevatedButtonThemeData(
-        //     style: ElevatedButton.styleFrom(
-        //       elevation: 0,
-        //       backgroundColor: MimosaColors.secondary,
-        //       shape: const RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.all(Radius.circular(10)),
-        //       ),
-        //       fixedSize: const Size(208, 54),
-        //     ),
-        //   ),
-        // ),
+        ).toTheme.copyWith(
+              scrollbarTheme: const ScrollbarThemeData().copyWith(
+                thumbVisibility: WidgetStateProperty.all<bool>(true),
+              ),
+            ),
         initialRoute: RouteGenerator.homepage,
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
