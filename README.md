@@ -37,3 +37,5 @@ Bibi's Home
 - Person moves to center
 - Person looks left, forward, top left, up, top right, down, points to sides
 - 6 directions with objects on each side
+
+- For level 1, there is no background animation

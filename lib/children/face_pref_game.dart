@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mimosa/ui/widgets/animations.dart';
+import 'package:mimosa/ui/widgets/rtn_animations.dart';
 
 class FacePreferenceGame extends StatefulWidget {
   const FacePreferenceGame({super.key});
