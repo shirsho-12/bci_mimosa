@@ -30,9 +30,6 @@ class _RTNGameState extends State<RTNGame> {
                 time: 200,
                 level: 3,
               ),
-              // ChildrenGameAnimation(
-              //     width: MediaQuery.of(context).size.width * 0.75,
-              //     height: MediaQuery.of(context).size.height * 0.75),
               const Center(child: RtnAnimationPage())
             ],
           ),
