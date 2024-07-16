@@ -8,7 +8,8 @@ abstract class RtnAnimationEvent {
 /// Event added when some custom logic happens
 /// {@endtemplate}
 class InitialEvent extends RtnAnimationEvent {
-  const InitialEvent();
+  const InitialEvent({required this.isLeft});
+  final bool isLeft;
   final int duration = 5000;
 }
 

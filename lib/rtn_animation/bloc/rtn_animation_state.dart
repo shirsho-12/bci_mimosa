@@ -6,7 +6,7 @@ part of 'rtn_animation_bloc.dart';
 class RtnAnimationState extends Equatable {
   /// {@macro rtn_animation_state}
   const RtnAnimationState({
-    this.duration = 2000,
+    this.duration = 5000,
   });
 
   /// Duration the state should be displayed
@@ -28,6 +28,10 @@ class RtnAnimationState extends Equatable {
 /// {@template rtn_animation_initial}
 /// The initial state of RtnAnimationState
 /// {@endtemplate}
+class RtnAnimationStart extends RtnAnimationState {
+  const RtnAnimationStart() : super();
+}
+
 class RtnAnimationInitial extends RtnAnimationState {
   const RtnAnimationInitial({this.shake = false}) : super();
 

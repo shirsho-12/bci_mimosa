@@ -1,4 +1,6 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:mimosa/models/audio_data.dart';
 import 'package:mimosa/rtn_animation/bloc/bloc.dart';
 import 'package:mimosa/models/image_data.dart' as ImageData;
 import 'dart:developer' as devtools show log;
@@ -14,6 +16,13 @@ class RtnAnimationBody extends StatelessWidget {
   /// {@macro rtn_animation_body}
   const RtnAnimationBody({super.key});
 
+  void playAudio(String path) async {
+    final player = AudioPlayer();
+    await player.setVolume(2.0);
+    await player.setSourceAsset(path);
+    await player.resume();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.4;
@@ -23,6 +32,10 @@ class RtnAnimationBody extends StatelessWidget {
     return BlocBuilder<RtnAnimationBloc, RtnAnimationState>(
         builder: (context, state) {
       devtools.log('RtnAnimationBody: state: $state');
+      if (state is RtnAnimationStart) {
+        playAudio(RTNAudio.start);
+        return GameScreen(duration: state.duration, isLeft: isLeft);
+      }
       if (state is RtnAnimationInitial) {
         return StationaryPerson(isLeft: isLeft, duration: state.duration);
       }

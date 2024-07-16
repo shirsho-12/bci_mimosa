@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'dart:developer' as devtools show log;
+
+import 'package:mimosa/models/audio_data.dart';
 
 part 'rtn_animation_event.dart';
 part 'rtn_animation_state.dart';
@@ -12,8 +15,9 @@ class RtnAnimationBloc extends Bloc<RtnAnimationEvent, RtnAnimationState> {
   Random random = Random();
   List<int> directions = [0, 1, 2, 3, 4, 5];
   List<int> seen = [];
+  final player = AudioPlayer();
 
-  RtnAnimationBloc() : super(const RtnAnimationInitial()) {
+  RtnAnimationBloc() : super(const RtnAnimationStart()) {
     on<InitialEvent>(_onRtnAnimationInitial);
     on<DistractorEvent>(_onDistractorEvent);
     on<MovingPersonEvent>(_onMovingPersonEvent);
@@ -21,10 +25,24 @@ class RtnAnimationBloc extends Bloc<RtnAnimationEvent, RtnAnimationState> {
     on<PointingPersonEvent>(_onPointingPersonEvent);
   }
 
+  void playAudio(String path, {bool? isLeft}) async {
+    // await player.play(DeviceFileSource(path))
+    // ;
+    if (isLeft is bool) {
+      await player.setBalance(isLeft ? -1.0 : 1.0);
+    } else {
+      await player.setBalance(0.0);
+    }
+    await player.setVolume(2.0);
+    await player.setSourceAsset(path);
+    await player.resume();
+  }
+
   void _onRtnAnimationInitial(
     InitialEvent event,
     Emitter<RtnAnimationState> emit,
   ) {
+    playAudio(RTNAudio.hello, isLeft: event.isLeft);
     emit(const RtnAnimationInitial());
   }
 
@@ -32,10 +50,8 @@ class RtnAnimationBloc extends Bloc<RtnAnimationEvent, RtnAnimationState> {
     DistractorEvent event,
     Emitter<RtnAnimationState> emit,
   ) {
+    playAudio(RTNAudio.lookAtThat, isLeft: event.isLeft);
     emit(RtnAnimationDistractor(event.isLeft, duration: event.duration));
-    // _tickerSubscription?.cancel();
-    // _tickerSubscription = _ticker.tick(ticks: event.duration).listen(
-    //     (duration) => emit(RtnAnimationDistractor(event.isLeft, duration)));
   }
 
   FutureOr<void> _onMovingPersonEvent(
@@ -49,6 +65,7 @@ class RtnAnimationBloc extends Bloc<RtnAnimationEvent, RtnAnimationState> {
     StationaryPersonEvent event,
     Emitter<RtnAnimationState> emit,
   ) {
+    playAudio(RTNAudio.wow);
     emit(RtnAnimationStationaryPerson(duration: event.duration));
   }
 
@@ -64,8 +81,10 @@ class RtnAnimationBloc extends Bloc<RtnAnimationEvent, RtnAnimationState> {
     devtools.log('Seen: $seen');
     if (seen.length == 5) {
       seen.clear();
+      playAudio(RTNAudio.goodbye);
       emit(const RtnAnimationLevelComplete());
     } else {
+      playAudio(RTNAudio.look[direction % 2]);
       emit(RtnAnimationPointingPerson(
           duration: event.duration, direction: direction));
     }

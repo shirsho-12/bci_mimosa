@@ -6,6 +6,50 @@ import 'package:mimosa/rtn_animation/bloc/bloc.dart';
 
 export 'rtn_animation_body.dart';
 
+class GameScreen extends StatelessWidget {
+  const GameScreen({super.key, required this.duration, required this.isLeft});
+  final int duration;
+  final bool isLeft;
+
+  @override
+  Widget build(BuildContext context) {
+    Future.delayed(
+      Duration(milliseconds: duration),
+      () {},
+    ).then(
+      (_) {
+        context.read<RtnAnimationBloc>().add(InitialEvent(isLeft: isLeft));
+      },
+    );
+
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    return Container(
+      color: Colors.yellow, // Set the background color to yellow
+      child: Center(
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: Colors.pink, // Set the box color to pink
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: const Center(
+            child: Text(
+              "Bibi's Home",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class StationaryPerson extends StatelessWidget {
   final bool isLeft;
   final int duration;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mimosa/children/face_pref_game.dart';
 import 'package:mimosa/children/rtn_game.dart';
-// import 'package:mimosa/landing_page.dart';
+import 'package:mimosa/landing_page.dart';
 import 'package:mimosa/parents/phase_two.dart';
 import 'package:mimosa/parents/phase_two_instructions.dart';
 import 'package:mimosa/parents/score_next_step.dart';
@@ -27,7 +27,7 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homepage:
-        return MaterialPageRoute(builder: (_) => const RTNGame());
+        return MaterialPageRoute(builder: (_) => const LandingPage());
       case parents:
         return MaterialPageRoute(builder: (_) => const MChatInstructionsPage());
       case qaPage:
