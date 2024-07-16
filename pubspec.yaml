@@ -44,6 +44,7 @@ dependencies:
   equatable: ^2.0.5
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
+  audioplayers: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -109,6 +110,9 @@ flutter:
     - assets/images/rtn_gp/level_3/f/
     - assets/images/rtn_gp/level_3/f/gaze/
     - assets/images/rtn_gp/level_3/f/point/
+    - assets/audio/
+    - assets/audio/face_pref/
+    - assets/audio/rtn/
 
   #   - images/a_dot_ham.jpeg
 
