@@ -21,8 +21,8 @@ class RTNAudio {
 }
 
 class FacePrefAudio {
-  static const String basePath = 'assets/audio/';
-  static const String facePrefPath = 'assets/audio/face_pref/';
+  static const String basePath = 'audio/';
+  static const String facePrefPath = 'audio/face_pref/';
 
   static const String bounce = '${facePrefPath}bounce.wav';
   static const String seeInside = '${facePrefPath}see_inside.wav';
@@ -30,5 +30,6 @@ class FacePrefAudio {
 
   static const String start = '${facePrefPath}start_audio.wav';
   static const String hello = '${basePath}hello.wav';
+  static const String clap = '${basePath}clap.wav';
   static const String goodbye = '${basePath}see_you.wav';
 }

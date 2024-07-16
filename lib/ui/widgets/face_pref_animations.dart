@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:developer' as devtools show log;
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:mimosa/models/audio_data.dart';
 import 'package:mimosa/models/constants.dart';
 import 'package:mimosa/models/image_data.dart' show FacePrefAssets;
 export 'responsive_layout_builder.dart';
@@ -17,6 +19,14 @@ export 'responsive_layout_builder.dart';
 
 // TODO: Implement fix, use a stack instead of an animation to change images
 // TODO: CONVERT TO BLOC
+
+AudioPlayer player = AudioPlayer();
+
+void playAudio(String path) async {
+  await player.setVolume(2.0);
+  await player.setSourceAsset(path);
+  await player.resume();
+}
 
 class ChildrenGameAnimation extends StatefulWidget {
   final double width;
@@ -96,6 +106,7 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
         ),
       ),
     );
+    playAudio(FacePrefAudio.start);
   }
 
   @override
@@ -120,6 +131,9 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
           child: AnimatedBuilder(
               animation: controller,
               builder: (context, child) {
+                if (image.value == FacePrefAssets.bagOpeningImages[0]) {
+                  playAudio(FacePrefAudio.seeInside);
+                }
                 return Container(
                   width: widget.width,
                   height: widget.height,
@@ -142,6 +156,11 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
               future: Future.delayed(Duration(seconds: Constants.initDuration)),
               builder: (context, snapshot) {
                 devtools.log(snapshot.connectionState.toString());
+                if (snapshot.connectionState == ConnectionState.done) {
+                  playAudio(FacePrefAudio.seeInside);
+                } else {
+                  playAudio(FacePrefAudio.hello);
+                }
                 return snapshot.connectionState == ConnectionState.done
                     ? GameAnimation(
                         width: widget.width, height: widget.height, level: 1)
@@ -261,6 +280,7 @@ class _GameAnimationState extends State<GameAnimation>
         builder: (context, snapshot) {
           devtools.log("second state ${snapshot.connectionState.toString()}");
           if (snapshot.connectionState == ConnectionState.done) {
+            playAudio(FacePrefAudio.clap);
             return LevelEndAnimation(
               width: widget.width,
               height: widget.height,
@@ -268,9 +288,11 @@ class _GameAnimationState extends State<GameAnimation>
               time: Constants.transitionDuration,
             );
           }
+          // playAudio(FacePrefAudio.bounce);
           return AnimatedBuilder(
               animation: controller,
               builder: (context, child) {
+                playAudio(FacePrefAudio.bounce);
                 if (image.value == null) {
                   return MarbleAnimation(
                     time: Constants.imageDuration,
