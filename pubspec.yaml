@@ -41,6 +41,9 @@ dependencies:
   yaml: ^3.1.2
   flex_color_scheme: ^7.3.1
   spritewidget: ^2.0.1
+  equatable: ^2.0.5
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
 
 dev_dependencies:
   flutter_test:
@@ -99,6 +102,14 @@ flutter:
     - assets/images/face_pref/level_1/
     - assets/images/face_pref/level_2/
     - assets/images/face_pref/level_3/
+    - assets/images/rtn_gp/
+    - assets/images/rtn_gp/level_3/m/
+    - assets/images/rtn_gp/level_3/m/gaze/
+    - assets/images/rtn_gp/level_3/m/point/
+    - assets/images/rtn_gp/level_3/f/
+    - assets/images/rtn_gp/level_3/f/gaze/
+    - assets/images/rtn_gp/level_3/f/point/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
