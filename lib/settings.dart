@@ -4,27 +4,6 @@ import 'package:mimosa/models/constants.dart';
 import 'package:mimosa/models/shared.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsKeys {
-  // face pref settings
-  static const initDuration = 'fp_init_duration';
-  static const gameDuration = 'fp_game_duration';
-  static const maxLevel = 'max_level';
-  static const transitionDuration = 'fp_transition_duration';
-  static const imageDuration = 'fp_image_duration';
-
-  // rtn settings
-  static const rtnInitDuration = 'rtn_init_duration';
-  static const distractorDuration = 'rtn_distractor_duration';
-  static const movementDuration = 'rtn_move_duration';
-  static const wowDuration = 'rtn_wow_duration';
-  static const pointingDuration = 'rtn_point_duration';
-
-  static const lowRiskNum = 'low_risk';
-  static const mediumRiskNum = 'medium_risk';
-
-  static const keyDarkMode = 'dark_mode';
-}
-
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -34,6 +13,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+  Constants constants = Constants();
 
   @override
   void initState() {
@@ -78,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.lowRisk.toString(),
+                initialValue: constants.lowRisk.toString(),
               ),
               TextInputSettingsTile(
                 title: "Threshold for medium risk classification",
@@ -88,13 +68,13 @@ class _SettingsPageState extends State<SettingsPage> {
                     return "Please enter a value between 0 and 20";
                   }
                   if (!isNumeric(val) ||
-                      double.parse(val) < Constants.mediumRisk ||
+                      double.parse(val) < constants.mediumRisk ||
                       double.parse(val) > 20) {
                     return "Please enter a valid number";
                   }
                   return null;
                 },
-                initialValue: Constants.mediumRisk.toString(),
+                initialValue: constants.mediumRisk.toString(),
               ),
             ],
           ),
@@ -113,7 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.initDuration.toString(),
+                initialValue: constants.initDuration.toString(),
               ),
               TextInputSettingsTile(
                 title: "Full Game Duration",
@@ -127,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.gameDuration.toString(),
+                initialValue: constants.gameDuration.toString(),
               ),
               TextInputSettingsTile(
                 title: "Max Level",
@@ -141,7 +121,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.maxLevel.toString(),
+                initialValue: constants.maxLevel.toString(),
               ),
               TextInputSettingsTile(
                 title: "Transition (between images) Duration",
@@ -155,7 +135,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.transitionDuration.toString(),
+                initialValue: constants.transitionDuration.toString(),
               ),
               TextInputSettingsTile(
                 title: "Image Duration",
@@ -169,7 +149,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.imageDuration.toString(),
+                initialValue: constants.imageDuration.toString(),
               ),
             ],
           ),
@@ -188,7 +168,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.rtnInitDuration.toString(),
+                initialValue: constants.rtnInitDuration.toString(),
               ),
               TextInputSettingsTile(
                 title: "Distractor Falling Duration",
@@ -202,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.distractorDuration.toString(),
+                initialValue: constants.distractorDuration.toString(),
               ),
               TextInputSettingsTile(
                 title: "Movement to Screen Center Duration",
@@ -216,7 +196,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.movementDuration.toString(),
+                initialValue: constants.movementDuration.toString(),
               ),
               TextInputSettingsTile(
                 title: "Between Image Duration",
@@ -230,7 +210,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.wowDuration.toString(),
+                initialValue: constants.wowDuration.toString(),
               ),
               TextInputSettingsTile(
                 title: "Pointing Duration",
@@ -244,7 +224,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   }
                   return null;
                 },
-                initialValue: Constants.pointingDuration.toString(),
+                initialValue: constants.pointingDuration.toString(),
               ),
             ],
           ),

@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await SharedData.init();
   SharePreferenceCache spCache = SharePreferenceCache();

@@ -27,40 +27,45 @@ class Constants {
     2, // half-open bag
     2, // open bag
   ];
-  static final int initDuration = int.parse(
+  int initDuration = int.parse(
       (Settings.getValue(SettingsKeys.initDuration, defaultValue: "10")!));
-  static final int gameDuration = int.parse(
+  int gameDuration = int.parse(
       (Settings.getValue(SettingsKeys.gameDuration, defaultValue: "32")!));
-  static final int maxLevel =
+  int maxLevel =
       int.parse((Settings.getValue(SettingsKeys.maxLevel, defaultValue: "3")!));
-  static final int transitionDuration = int.parse(
+  int transitionDuration = int.parse(
       (Settings.getValue(SettingsKeys.transitionDuration, defaultValue: "4")!));
-  static final int imageDuration = int.parse(
+  int imageDuration = int.parse(
       (Settings.getValue(SettingsKeys.imageDuration, defaultValue: "5")!));
-  static double transitionWeight =
-      transitionDuration / (transitionDuration + imageDuration);
-  static double imageWeight =
-      imageDuration / (transitionDuration + imageDuration);
 
-  static int lowRisk = int.parse(
+  double? transitionWeight;
+  double? imageWeight;
+
+  Constants() {
+    transitionWeight =
+        transitionDuration / (transitionDuration + imageDuration);
+    imageWeight = imageDuration / (transitionDuration + imageDuration);
+  }
+
+  int lowRisk = int.parse(
       (Settings.getValue(SettingsKeys.lowRiskNum, defaultValue: "3")!));
-  static int mediumRisk = int.parse(
+  int mediumRisk = int.parse(
       (Settings.getValue(SettingsKeys.mediumRiskNum, defaultValue: "8")!));
 
-  static final int rtnInitDuration = int.parse(
+  int rtnInitDuration = int.parse(
       (Settings.getValue(SettingsKeys.rtnInitDuration, defaultValue: "5000")!));
-  static final int distractorDuration = int.parse((Settings.getValue(
+  int distractorDuration = int.parse((Settings.getValue(
       SettingsKeys.distractorDuration,
       defaultValue: "5000")!));
-  static final int movementDuration = int.parse((Settings.getValue(
+  int movementDuration = int.parse((Settings.getValue(
       SettingsKeys.movementDuration,
       defaultValue: "8000")!));
-  static final int wowDuration = int.parse(
+  int wowDuration = int.parse(
       (Settings.getValue(SettingsKeys.wowDuration, defaultValue: "3000")!));
-  static final int pointingDuration = int.parse((Settings.getValue(
+  int pointingDuration = int.parse((Settings.getValue(
       SettingsKeys.pointingDuration,
       defaultValue: "3000")!));
 
-  static final bool darkMode =
+  bool darkMode =
       Settings.getValue(SettingsKeys.keyDarkMode, defaultValue: false)!;
 }

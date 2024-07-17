@@ -11,11 +11,11 @@ class ScoreNextStep extends StatelessWidget {
     String risklevel = '';
     String caseString = ''; // Contains explanation of risk level and next steps
     int score = context.read<QuestionSet>().getScore();
-    if (score < Constants.lowRisk) {
+    if (score < Constants().lowRisk) {
       risklevel = 'low';
       caseString =
           'If your child is under 24 months, schedule a follow-up screening after their second birthday. No further action is needed at this time.';
-    } else if (score < Constants.mediumRisk) {
+    } else if (score < Constants().mediumRisk) {
       risklevel = 'medium';
       caseString = 'Please continue to the next stage of the screening.';
     } else {

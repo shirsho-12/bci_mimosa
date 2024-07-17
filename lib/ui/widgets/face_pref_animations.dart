@@ -60,7 +60,7 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
     _setDurationValues();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: Constants.initDuration),
+      duration: Duration(seconds: Constants().initDuration),
     )..forward();
     size = Tween<double>(
       begin: 0.7,
@@ -153,7 +153,8 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
         ),
         Center(
           child: FutureBuilder(
-              future: Future.delayed(Duration(seconds: Constants.initDuration)),
+              future:
+                  Future.delayed(Duration(seconds: Constants().initDuration)),
               builder: (context, snapshot) {
                 devtools.log(snapshot.connectionState.toString());
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -238,11 +239,11 @@ class _GameAnimationState extends State<GameAnimation>
 
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: Constants.gameDuration),
+      duration: Duration(seconds: Constants().gameDuration),
     )..forward();
     double transitionWeight =
-        Constants.transitionWeight / (imageList.length * 2 - 1);
-    double imageWeight = Constants.imageWeight / (imageList.length * 2 - 1);
+        Constants().transitionWeight! / (imageList.length * 2 - 1);
+    double imageWeight = Constants().imageWeight! / (imageList.length * 2 - 1);
 
     image = TweenSequence<AssetImage?>(<TweenSequenceItem<AssetImage?>>[
       for (int i = 0; i < imageList.length * 2 - 1; i++)
@@ -276,7 +277,7 @@ class _GameAnimationState extends State<GameAnimation>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.delayed(Duration(seconds: Constants.gameDuration)),
+        future: Future.delayed(Duration(seconds: Constants().gameDuration)),
         builder: (context, snapshot) {
           devtools.log("second state ${snapshot.connectionState.toString()}");
           if (snapshot.connectionState == ConnectionState.done) {
@@ -285,7 +286,7 @@ class _GameAnimationState extends State<GameAnimation>
               width: widget.width,
               height: widget.height,
               level: widget.level,
-              time: Constants.transitionDuration,
+              time: Constants().transitionDuration,
             );
           }
           // playAudio(FacePrefAudio.bounce);
@@ -295,7 +296,7 @@ class _GameAnimationState extends State<GameAnimation>
                 playAudio(FacePrefAudio.bounce);
                 if (image.value == null) {
                   return MarbleAnimation(
-                    time: Constants.imageDuration,
+                    time: Constants().imageDuration,
                     width: widget.width,
                     height: widget.height,
                   );
@@ -407,7 +408,7 @@ class _LevelEndAnimationState extends State<LevelEndAnimation> {
         index++;
         if (index == images.length) {
           index = 0;
-          if (widget.level < Constants.maxLevel) {
+          if (widget.level < Constants().maxLevel) {
             loop++;
           }
         }
