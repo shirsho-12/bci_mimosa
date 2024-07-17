@@ -221,7 +221,7 @@ class CenterPerson extends StatelessWidget {
       future: Future.delayed(Duration(milliseconds: duration)),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          context.read<RtnAnimationBloc>().add(StationaryPersonEvent());
+          context.read<RtnAnimationBloc>().add(PointingPersonEvent());
         }
         return Center(
           child: Image.asset(
