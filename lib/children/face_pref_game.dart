@@ -12,16 +12,16 @@ class _FacePreferenceGameState extends State<FacePreferenceGame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Mimosa - Tofu's Bag"),
-      ),
+      // appBar: AppBar(
+      // title: const Text ("Mimosa - Tofu's Bag"),
+      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ChildrenGameAnimation(
-                width: MediaQuery.of(context).size.width * 0.75,
-                height: MediaQuery.of(context).size.height * 0.75),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height),
           ],
         ),
       ),

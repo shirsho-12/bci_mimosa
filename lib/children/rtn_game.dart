@@ -15,18 +15,18 @@ class _RTNGameState extends State<RTNGame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Mimosa - Bibi's Home"),
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Mimosa - Bibi's Home"),
+      // ),
       body: Center(
         child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.75,
-          height: MediaQuery.of(context).size.height * 0.75,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
               Background(
-                width: MediaQuery.of(context).size.width * 0.75,
-                height: MediaQuery.of(context).size.height * 0.75,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
                 time: 200,
                 level: 3,
               ),
