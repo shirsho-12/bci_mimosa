@@ -8,33 +8,33 @@ abstract class RtnAnimationEvent {
 /// Event added when some custom logic happens
 /// {@endtemplate}
 class InitialEvent extends RtnAnimationEvent {
-  const InitialEvent({required this.isLeft});
+  InitialEvent({required this.isLeft});
   final bool isLeft;
-  final int duration = 5000;
+  final int duration = Constants.rtnInitDuration;
 }
 
 class DistractorEvent extends RtnAnimationEvent {
-  const DistractorEvent({required this.isLeft});
+  DistractorEvent({required this.isLeft});
   final bool isLeft;
-  final int duration = 5000;
+  final int duration = Constants.distractorDuration;
 }
 
 class MovingPersonEvent extends RtnAnimationEvent {
-  const MovingPersonEvent({
+  MovingPersonEvent({
     required this.isLeft,
   });
   final bool isLeft;
-  final int duration = 8000;
+  final int duration = Constants.movementDuration;
 }
 
 class StationaryPersonEvent extends RtnAnimationEvent {
-  const StationaryPersonEvent();
-  final int duration = 3000;
+  StationaryPersonEvent();
+  final int duration = Constants.wowDuration;
 }
 
 class PointingPersonEvent extends RtnAnimationEvent {
-  const PointingPersonEvent();
-  final int duration = 3000;
+  PointingPersonEvent();
+  final int duration = Constants.pointingDuration;
 }
 
 class GameEndEvent extends RtnAnimationEvent {

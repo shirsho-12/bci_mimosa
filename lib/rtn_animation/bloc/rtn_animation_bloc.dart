@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'dart:developer' as devtools show log;
 
 import 'package:mimosa/models/audio_data.dart';
+import 'package:mimosa/models/constants.dart';
 
 part 'rtn_animation_event.dart';
 part 'rtn_animation_state.dart';

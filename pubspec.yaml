@@ -45,6 +45,9 @@ dependencies:
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   audioplayers: ^6.0.0
+  flutter_settings_screens: ^0.3.4
+  shared_preferences: ^2.2.3
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -121,3 +124,6 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+flutter_native_splash:
+  color: "#42a5f5"
+  image: assets/splash.png

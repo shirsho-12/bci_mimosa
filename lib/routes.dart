@@ -8,9 +8,11 @@ import 'package:mimosa/parents/score_next_step.dart';
 import 'package:mimosa/parents/m_chat_instructions.dart';
 import 'package:mimosa/parents/qa_page.dart';
 import 'package:mimosa/children/children_home.dart';
+import 'package:mimosa/settings.dart';
 
 class RouteGenerator {
   static const String homepage = '/';
+  static const String config = '/settings';
   static const String parents = '/parents';
   static const String children = '/children_home';
   static const String qaPage = '/phase_one';
@@ -28,6 +30,8 @@ class RouteGenerator {
     switch (settings.name) {
       case homepage:
         return MaterialPageRoute(builder: (_) => const LandingPage());
+      case config:
+        return MaterialPageRoute(builder: (_) => const SettingsPage());
       case parents:
         return MaterialPageRoute(builder: (_) => const MChatInstructionsPage());
       case qaPage:

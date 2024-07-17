@@ -188,7 +188,7 @@ class _MovingPersonState extends State<MovingPerson>
       future: Future.delayed(Duration(milliseconds: widget.duration)),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          context.read<RtnAnimationBloc>().add(const StationaryPersonEvent());
+          context.read<RtnAnimationBloc>().add(StationaryPersonEvent());
         }
         return AnimatedBuilder(
           animation: controller,
@@ -221,7 +221,7 @@ class CenterPerson extends StatelessWidget {
       future: Future.delayed(Duration(milliseconds: duration)),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          context.read<RtnAnimationBloc>().add(const StationaryPersonEvent());
+          context.read<RtnAnimationBloc>().add(StationaryPersonEvent());
         }
         return Center(
           child: Image.asset(
@@ -250,7 +250,7 @@ class PointingPerson extends StatelessWidget {
       future: Future.delayed(Duration(milliseconds: duration)),
       builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          context.read<RtnAnimationBloc>().add(const StationaryPersonEvent());
+          context.read<RtnAnimationBloc>().add(StationaryPersonEvent());
         }
         return Center(
           child: Image.asset(

@@ -14,6 +14,14 @@ class LandingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mimosa'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                devtools.log('Settings');
+                Navigator.pushNamed(context, '/settings');
+              },
+              icon: const Icon(Icons.settings))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
