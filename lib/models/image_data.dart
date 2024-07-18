@@ -61,38 +61,41 @@ class FacePrefAssets {
   ];
 }
 
-List<String> backgroundImages = [
-  'assets/images/rtn_gp/bg1.png',
-  'assets/images/rtn_gp/bg2.png',
-];
+class RTNAssets {
+  int level = 1;
+  String gender = 'm';
+  late List<String> moveImages;
+  late List<String> gazeImages;
+  late List<String> pointImages;
+  late List<String> distractors;
+
+  RTNAssets(this.level, this.gender) {
+    moveImages = [
+      'assets/images/rtn_gp/level_$level/$gender/walk.png',
+      'assets/images/rtn_gp/level_$level/$gender/walk2.png',
+      'assets/images/rtn_gp/level_$level/$gender/talk.png',
+      'assets/images/rtn_gp/level_$level/$gender/wow.png',
+    ];
+
+    pointImages = [
+      'assets/images/rtn_gp/level_$level/$gender/point/bird.png',
+      'assets/images/rtn_gp/level_$level/$gender/point/butterfly.png',
+      'assets/images/rtn_gp/level_$level/$gender/point/cloud.png',
+      'assets/images/rtn_gp/level_$level/$gender/point/flower.png',
+      'assets/images/rtn_gp/level_$level/$gender/point/rabbit.png',
+      'assets/images/rtn_gp/level_$level/$gender/point/snail.png',
+    ];
+
+    distractors = [
+      'assets/images/rtn_gp/distractor12.png',
+      'assets/images/rtn_gp/distractor8.png',
+    ];
+  }
+
+  static final List<String> backgroundImages = [
+    'assets/images/rtn_gp/bg1.png',
+    'assets/images/rtn_gp/bg2.png',
+  ];
 
 // Indexing: 0: walk right, 1: walk left, 2: talk, 3: wow
-List<String> moveImagesF = [
-  'assets/images/rtn_gp/level_3/f/walk.png',
-  'assets/images/rtn_gp/level_3/f/walk2.png',
-  'assets/images/rtn_gp/level_3/f/talk.png',
-  'assets/images/rtn_gp/level_3/f/wow.png',
-];
-
-List<String> gazeImagesF = [
-  'assets/images/rtn_gp/level_3/f/gaze/bird.png',
-  'assets/images/rtn_gp/level_3/f/gaze/butterfly.png',
-  'assets/images/rtn_gp/level_3/f/gaze/cloud.png',
-  'assets/images/rtn_gp/level_3/f/gaze/flower.png',
-  'assets/images/rtn_gp/level_3/f/gaze/rabbit.png',
-  'assets/images/rtn_gp/level_3/f/gaze/snail.png',
-];
-
-List<String> pointImagesF = [
-  'assets/images/rtn_gp/level_3/f/point/bird.png',
-  'assets/images/rtn_gp/level_3/f/point/butterfly.png',
-  'assets/images/rtn_gp/level_3/f/point/cloud.png',
-  'assets/images/rtn_gp/level_3/f/point/flower.png',
-  'assets/images/rtn_gp/level_3/f/point/rabbit.png',
-  'assets/images/rtn_gp/level_3/f/point/snail.png',
-];
-
-List<String> distractors = [
-  'assets/images/rtn_gp/distractor12.png',
-  'assets/images/rtn_gp/distractor8.png',
-];
+}

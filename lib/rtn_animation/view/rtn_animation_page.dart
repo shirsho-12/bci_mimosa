@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mimosa/models/image_data.dart';
 import 'package:mimosa/rtn_animation/bloc/bloc.dart';
-import 'package:mimosa/rtn_animation/widgets/rtn_animation_body.dart';
+import 'package:mimosa/rtn_animation/widgets/widgets.dart';
 
 /// {@template rtn_animation_page}
 /// A description for RtnAnimationPage
@@ -32,6 +33,17 @@ class RtnAnimationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RtnAnimationBody();
+    return Stack(
+      children: [
+        Background(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          time: 200,
+          level: 3,
+          imagePaths: RTNAssets.backgroundImages,
+        ),
+        const Center(child: RtnAnimationBody())
+      ],
+    );
   }
 }

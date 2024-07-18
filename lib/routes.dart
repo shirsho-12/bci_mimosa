@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mimosa/children/face_pref_game.dart';
-import 'package:mimosa/children/rtn_game.dart';
 import 'package:mimosa/landing_page.dart';
 import 'package:mimosa/parents/phase_two.dart';
 import 'package:mimosa/parents/phase_two_instructions.dart';
@@ -9,6 +8,8 @@ import 'package:mimosa/parents/m_chat_instructions.dart';
 import 'package:mimosa/parents/qa_page.dart';
 import 'package:mimosa/children/children_home.dart';
 import 'package:mimosa/settings.dart';
+
+import 'rtn_animation/rtn_animation.dart';
 
 class RouteGenerator {
   static const String homepage = '/';
@@ -47,7 +48,7 @@ class RouteGenerator {
       case facePrefGame:
         return MaterialPageRoute(builder: (_) => const FacePreferenceGame());
       case rtnGame:
-        return MaterialPageRoute(builder: (_) => const RTNGame());
+        return MaterialPageRoute(builder: (_) => const RtnAnimationPage());
 
       default:
         return MaterialPageRoute(

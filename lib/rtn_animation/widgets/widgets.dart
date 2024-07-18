@@ -51,8 +51,12 @@ class GameScreen extends StatelessWidget {
 class StationaryPerson extends StatelessWidget {
   final bool isLeft;
   final int duration;
+  final String imagePath;
   const StationaryPerson(
-      {super.key, required this.isLeft, required this.duration});
+      {super.key,
+      required this.isLeft,
+      required this.duration,
+      required this.imagePath});
 
   Alignment getAlignment(bool side) {
     return side ? const Alignment(-1.5, 0) : const Alignment(1.5, 0);
@@ -72,7 +76,7 @@ class StationaryPerson extends StatelessWidget {
         return Align(
           alignment: getAlignment(isLeft),
           child: Image.asset(
-            ImageData.moveImagesF[2],
+            imagePath,
             width: width,
             height: height,
           ),
@@ -85,8 +89,12 @@ class StationaryPerson extends StatelessWidget {
 class DistractorWidget extends StatefulWidget {
   final bool isLeft;
   final int duration;
+  final String imagePath;
   const DistractorWidget(
-      {super.key, required this.isLeft, required this.duration});
+      {super.key,
+      required this.isLeft,
+      required this.duration,
+      required this.imagePath});
 
   @override
   State<DistractorWidget> createState() => _DistractorWidgetState();
@@ -138,7 +146,7 @@ class _DistractorWidgetState extends State<DistractorWidget>
                     alignment:
                         Alignment(widget.isLeft ? 0.9 : -0.9, alignment.value),
                     child: Image.asset(
-                      ImageData.distractors[0],
+                      widget.imagePath,
                       width: width * 0.3,
                       height: height * 0.3,
                     ));
@@ -150,7 +158,12 @@ class _DistractorWidgetState extends State<DistractorWidget>
 class MovingPerson extends StatefulWidget {
   final bool isLeft;
   final int duration;
-  const MovingPerson({super.key, required this.isLeft, required this.duration});
+  final String imagePath;
+  const MovingPerson(
+      {super.key,
+      required this.isLeft,
+      required this.duration,
+      required this.imagePath});
 
   @override
   State<MovingPerson> createState() => _MovingPersonState();
@@ -196,7 +209,7 @@ class _MovingPersonState extends State<MovingPerson>
             return Align(
               alignment: Alignment(position.value, 0),
               child: Image.asset(
-                ImageData.moveImagesF[widget.isLeft ? 0 : 1],
+                widget.imagePath,
                 width: width,
                 height: height,
               ),
@@ -210,7 +223,9 @@ class _MovingPersonState extends State<MovingPerson>
 
 class CenterPerson extends StatelessWidget {
   final int duration;
-  const CenterPerson({super.key, required this.duration});
+  final String imagePath;
+  const CenterPerson(
+      {super.key, required this.duration, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +240,7 @@ class CenterPerson extends StatelessWidget {
         }
         return Center(
           child: Image.asset(
-            ImageData.moveImagesF[3],
+            imagePath,
             width: width,
             height: height,
           ),
@@ -238,8 +253,12 @@ class CenterPerson extends StatelessWidget {
 class PointingPerson extends StatelessWidget {
   final int duration;
   final int direction;
+  final String imagePath;
   const PointingPerson(
-      {super.key, required this.duration, required this.direction});
+      {super.key,
+      required this.duration,
+      required this.direction,
+      required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -254,12 +273,85 @@ class PointingPerson extends StatelessWidget {
         }
         return Center(
           child: Image.asset(
-            ImageData.pointImagesF[direction],
+            imagePath,
             width: width,
             height: height,
           ),
         );
       },
+    );
+  }
+}
+
+class Background extends StatefulWidget {
+  const Background(
+      {super.key,
+      required this.width,
+      required this.height,
+      required this.level,
+      required this.time,
+      required this.imagePaths});
+
+  final double width;
+  final double height;
+  final int level;
+  final int time;
+  final List<String> imagePaths;
+
+  @override
+  State<Background> createState() => _BackgroundState();
+}
+
+class _BackgroundState extends State<Background> {
+  int index = 0;
+  late List<Center> images;
+  late Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(Duration(milliseconds: widget.time), (timer) {
+      setState(() {
+        index = (index + 1) % widget.imagePaths.length;
+      });
+    });
+    List<String> temp = widget.imagePaths + widget.imagePaths;
+    images = temp
+        .map((e) => AssetImage(e))
+        .toList()
+        .cast<AssetImage>()
+        .map((e) => Center(
+                child: Image(
+              image: e,
+              width: widget.width,
+              height: widget.height,
+              key: ValueKey<int>(index++),
+            )))
+        .toList();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Cancel animation if level 1
+    if (widget.level == 1) {
+      timer.cancel();
+      return images[0];
+    }
+    if (index >= images.length) index = 0;
+    return Stack(
+      children: [
+        images[0],
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: widget.time),
+          child: images[index],
+        ),
+      ],
     );
   }
 }
