@@ -45,6 +45,7 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
   late Animation<double> size;
   late Animation<double> rotate;
   late Animation<String> image;
+  late String gender;
 
   late List<double> durationValues;
 
@@ -107,6 +108,7 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
       ),
     );
     playAudio(FacePrefAudio.start);
+    gender = DateTime.now().millisecondsSinceEpoch % 2 == 0 ? 'm' : 'f';
   }
 
   @override
@@ -164,7 +166,11 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
                 }
                 return snapshot.connectionState == ConnectionState.done
                     ? GameAnimation(
-                        width: widget.width, height: widget.height, level: 1)
+                        width: widget.width,
+                        height: widget.height,
+                        level: 1,
+                        gender: gender,
+                      )
                     : Container();
               }),
         ),
@@ -448,6 +454,7 @@ class _LevelEndAnimationState extends State<LevelEndAnimation> {
         : GameAnimation(
             width: widget.width,
             height: widget.height,
-            level: widget.level + 1);
+            level: widget.level + 1,
+            gender: DateTime.now().millisecondsSinceEpoch % 2 == 0 ? 'm' : 'f');
   }
 }

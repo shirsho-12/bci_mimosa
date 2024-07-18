@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mimosa/models/image_data.dart';
-import 'package:mimosa/rtn_animation/bloc/bloc.dart';
-import 'package:mimosa/rtn_animation/widgets/widgets.dart';
+import 'package:mimosa/children/rtn_animation/bloc/bloc.dart';
+import 'package:mimosa/children/rtn_animation/widgets/widgets.dart';
 
 /// {@template rtn_animation_page}
 /// A description for RtnAnimationPage

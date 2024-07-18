@@ -48,6 +48,8 @@ dependencies:
   flutter_settings_screens: ^0.3.4
   shared_preferences: ^2.2.3
   flutter_native_splash: ^2.4.1
+  sqflite: ^2.3.3+1
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:mimosa/models/audio_data.dart';
-import 'package:mimosa/rtn_animation/bloc/bloc.dart';
+import 'package:mimosa/children/rtn_animation/bloc/bloc.dart';
 import 'package:mimosa/models/image_data.dart';
 import 'dart:developer' as devtools show log;
 

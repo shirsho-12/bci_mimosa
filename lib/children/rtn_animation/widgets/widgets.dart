@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mimosa/models/image_data.dart' as ImageData;
-import 'package:mimosa/rtn_animation/bloc/bloc.dart';
+import 'package:mimosa/children/rtn_animation/bloc/bloc.dart';
 
 export 'rtn_animation_body.dart';
 

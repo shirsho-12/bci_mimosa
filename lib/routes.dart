@@ -9,7 +9,7 @@ import 'package:mimosa/parents/qa_page.dart';
 import 'package:mimosa/children/children_home.dart';
 import 'package:mimosa/settings.dart';
 
-import 'rtn_animation/rtn_animation.dart';
+import 'children/rtn_animation/rtn_animation.dart';
 
 class RouteGenerator {
   static const String homepage = '/';
