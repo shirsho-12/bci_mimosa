@@ -1,7 +1,6 @@
 library app_ui;
 
 export 'ui/colors.dart';
-export 'ui/layout/layout.dart';
 export 'ui/theme.dart';
 export 'ui/typography/typography.dart';
 export 'ui/widgets/widgets.dart';

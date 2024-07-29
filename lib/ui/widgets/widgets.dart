@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mimosa/ui/typography/text_styles.dart';
 
-export 'responsive_layout_builder.dart';
+/*
+  This file contains the widgets used in the Mimosa app.
 
+  The buttons are divided into two categories:
+  1. MimosaButtonSmall
+  2. MimosaButtonLarge
+
+*/
 class ButtonText extends StatelessWidget {
   final String buttonText;
   const ButtonText({super.key, required this.buttonText});

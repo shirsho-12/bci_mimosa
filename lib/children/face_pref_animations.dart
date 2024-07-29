@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:mimosa/models/audio_data.dart';
 import 'package:mimosa/models/constants.dart';
 import 'package:mimosa/models/image_data.dart' show FacePrefAssets;
-export 'responsive_layout_builder.dart';
 
 /// Steps:
 /// Closed bag zooms in and shakes/rotates 30 degrees
@@ -28,6 +27,8 @@ void playAudio(String path) async {
   await player.resume();
 }
 
+/// The children game animation plays the images for each level
+/// The app initializes the game duration, max level, transition duration,
 class ChildrenGameAnimation extends StatefulWidget {
   final double width;
   final double height;
@@ -179,6 +180,8 @@ class _ChildrenGameAnimationState extends State<ChildrenGameAnimation>
   }
 }
 
+/// The game animation plays the images for each level
+/// We use a stack to overlay the images on top of each other
 class GameAnimation extends StatefulWidget {
   const GameAnimation({
     super.key,
@@ -317,6 +320,9 @@ class _GameAnimationState extends State<GameAnimation>
   }
 }
 
+/// The marble animation plays when the image is transitioning
+/// from one image to another
+/// We use a stack to overlay the images on top of each other
 class MarbleAnimation extends StatefulWidget {
   const MarbleAnimation(
       {super.key,
@@ -378,6 +384,10 @@ class _MarbleAnimationState extends State<MarbleAnimation> {
   }
 }
 
+/// The level end animation is a balloon animation
+/// that plays when a level is completed
+/// We use a stack to overlay the balloons on top of each other
+/// If the level is less than the max level, we start the next level
 class LevelEndAnimation extends StatefulWidget {
   const LevelEndAnimation(
       {super.key,
