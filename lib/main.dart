@@ -1,6 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:mimosa/app_ui.dart';
 import 'package:mimosa/models/constants.dart';
