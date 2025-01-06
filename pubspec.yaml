@@ -109,15 +109,26 @@ flutter:
     - assets/images/face_pref/level_2/
     - assets/images/face_pref/level_3/
     - assets/images/rtn_gp/
+    - assets/images/rtn_gp/level_1/
+    - assets/images/rtn_gp/level_2/
+    - assets/images/rtn_gp/level_3/
+    - assets/images/rtn_gp/level_1/m/
+    - assets/images/rtn_gp/level_1/m/point/
+    - assets/images/rtn_gp/level_1/f/
+    - assets/images/rtn_gp/level_1/f/point/
+    - assets/images/rtn_gp/level_2/m/
+    - assets/images/rtn_gp/level_2/m/point/
+    - assets/images/rtn_gp/level_2/f/
+    - assets/images/rtn_gp/level_2/f/point/
     - assets/images/rtn_gp/level_3/m/
-    - assets/images/rtn_gp/level_3/m/gaze/
     - assets/images/rtn_gp/level_3/m/point/
     - assets/images/rtn_gp/level_3/f/
-    - assets/images/rtn_gp/level_3/f/gaze/
     - assets/images/rtn_gp/level_3/f/point/
     - assets/audio/
     - assets/audio/face_pref/
     - assets/audio/rtn/
+  # - assets/images/rtn_gp/level_3/m/gaze/
+  # - assets/images/rtn_gp/level_3/f/gaze/
 
   #   - images/a_dot_ham.jpeg
 

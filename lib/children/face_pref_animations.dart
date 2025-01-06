@@ -23,6 +23,7 @@ AudioPlayer player = AudioPlayer();
 
 void playAudio(String path) async {
   await player.setVolume(2.0);
+  devtools.log("Playing audio $path");
   await player.setSourceAsset(path);
   await player.resume();
 }

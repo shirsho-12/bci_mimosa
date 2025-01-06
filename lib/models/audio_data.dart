@@ -21,15 +21,15 @@ class RTNAudio {
 }
 
 class FacePrefAudio {
-  static const String basePath = 'audio/';
-  static const String facePrefPath = 'audio/face_pref/';
+  static const String basePath = 'audio';
+  static const String facePrefPath = '$basePath/face_pref';
 
-  static const String bounce = '${facePrefPath}bounce.wav';
-  static const String seeInside = '${facePrefPath}see_inside.wav';
-  static const String makeFriends = '${facePrefPath}make_friends.wav';
+  static const String bounce = '$facePrefPath/bounce.wav';
+  static const String seeInside = '$facePrefPath/see_inside.wav';
+  static const String makeFriends = '$facePrefPath/make_friends.wav';
 
-  static const String start = '${facePrefPath}start_audio.wav';
-  static const String hello = '${basePath}hello.wav';
-  static const String clap = '${basePath}clap.wav';
-  static const String goodbye = '${basePath}see_you.wav';
+  static const String start = '$facePrefPath/start_audio.wav';
+  static const String hello = '$basePath/hello.wav';
+  static const String clap = '$basePath/clap.wav';
+  static const String goodbye = '$basePath/see_you.wav';
 }

@@ -92,9 +92,13 @@ class _RtnAnimationBodyState extends State<RtnAnimationBody> {
             imagePath: assets.pointImages[state.direction]);
       }
 
-      if (state is RtnAnimationLevelComplete) {
-        setState(() {
-          level++;
+      if (state is RtnAnimationLevelComplete && level < 3) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          setState(() {
+            level++;
+            assets = RTNAssets(level, isMale ? 'm' : 'f');
+            context.read<RtnAnimationBloc>().add(InitialEvent(isLeft: isLeft));
+          });
         });
       }
 
